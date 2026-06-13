@@ -426,9 +426,7 @@ img {
 
 .id-swatch {
   width: 100%;
-  height: clamp(32px, 5vw, 64px);
-  object-fit: cover;
-  object-position: left;
+  height: auto;
 }
 
 .id-photo img {
