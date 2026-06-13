@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01. Tanpo — Branding</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+</head>
+<body class="page-project">
+
+  <!-- ══════════════════════════════════════════════════════
+       1 · HERO
+       Layout: left col (keywords → huge title → logo label)
+               right col (café cup photo, flush to edge)
+       Then: strip of 3 (coffee bean | coffee | coffe shop)
+       Then: footer (welcome body | since 2024)
+  ══════════════════════════════════════════════════════ -->
+  <section class="s-hero">
+
+    <div class="hero-layout">
+      <div class="hero-left">
+        <div class="hero-keywords">
+          <img src="/assets/tanpo/Text 1.png" alt="MINIMALIST" class="kw">
+          <span class="kw-sep">·</span>
+          <img src="/assets/tanpo/Text 2.png" alt="MODERN" class="kw">
+          <span class="kw-sep">·</span>
+          <img src="/assets/tanpo/Text 3.png" alt="YOUTHFUL" class="kw">
+          <span class="kw-sep">·</span>
+          <img src="/assets/tanpo/Text 4.png" alt="DYNAMIC" class="kw">
+        </div>
+        <div class="hero-title">
+          <img src="/assets/tanpo/Text 5.png" alt="01. Tanpo">
+        </div>
+        <div class="hero-label">
+          <img src="/assets/tanpo/Text 6.png" alt="Logo → Branding">
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="/assets/tanpo/Cafe Cup 1.jpg" alt="Tanpo cafe cup" class="hero-photo-img">
+      </div>
+    </div>
+
+    <!-- Row A: Coffee Bean (height = text) | welcome body copy -->
+    <div class="hero-row-a">
+      <div class="hero-bean reveal">
+        <img src="/assets/tanpo/Coffee Bean.jpg" alt="Coffee beans">
+      </div>
+      <div class="hero-body reveal">
+        <img src="/assets/tanpo/Text 8.png" alt="Welcome to our cozy café">
+      </div>
+    </div>
+
+    <!-- Row B: Cup (left) | right col [Text7 overlapping cup · Text9 bottom-right] -->
+    <div class="hero-row-b">
+      <div class="hero-cup reveal">
+        <img src="/assets/tanpo/Cup.jpg" alt="Coffee cup">
+      </div>
+
+      <div class="hero-right-b">
+        <div class="hero-shop-wrap reveal">
+          <img src="/assets/tanpo/Text 7.png" alt="(Coffe Shop)" class="hero-shop-text">
+        </div>
+
+        <div class="hero-since reveal">
+          <img src="/assets/tanpo/Text 9.png" alt="Since 2024">
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       2 · DARK BRAND REVEAL
+       Make coffee.jpg as full-bleed parallax background.
+       Namecard.png (both cream + dark cards) centered.
+  ══════════════════════════════════════════════════════ -->
+  <section class="s-dark">
+    <div class="dark-bg">
+      <img src="/assets/tanpo/Coffee Background.jpg" alt="Coffee bar interior">
+    </div>
+    <div class="dark-overlay"></div>
+    <div class="dark-content dark-content--center">
+      <div class="namecard-wrap reveal-dark">
+        <img src="/assets/tanpo/Namecard.png" alt="Tanpo namecard">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       3 · BRAND IDENTITY
+       Row A: 4-col photo grid
+         [dark swatch → Dandelion] [Cement → cream swatch]
+         [brown swatch → Coffee]   [brand story text]
+       Row B: Logo breakdown
+         [Tanpo Logo.png]  [typography annotations]
+       Row C: Sketch marks
+         [Sketch.png + label]  [Icon.png + label]
+  ══════════════════════════════════════════════════════ -->
+  <section class="s-identity">
+    <div class="id-row">
+
+      <!-- Left half: 3 photo columns with swatches -->
+      <div class="id-left">
+
+        <div class="id-col">
+          <img src="/assets/tanpo/Swatch Color 1.png" alt="#1c1c1c" class="id-swatch reveal">
+          <div class="id-photo reveal">
+            <img src="/assets/tanpo/Dandelion.jpg" alt="Dandelion">
+          </div>
+        </div>
+
+        <div class="id-col">
+          <div class="id-photo reveal">
+            <img src="/assets/tanpo/Cement.jpg" alt="Cement texture">
+          </div>
+          <img src="/assets/tanpo/Swatch Color 2.png" alt="#583f1e" class="id-swatch reveal">
+        </div>
+
+        <div class="id-col">
+          <img src="/assets/tanpo/Swatch Color 3.png" alt="#efeeee" class="id-swatch reveal">
+          <div class="id-photo reveal">
+            <img src="/assets/tanpo/Coffee.jpg" alt="Coffee">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right half: story (top) + logo block (bottom) -->
+      <div class="id-right">
+
+        <!-- Brand story -->
+        <div class="id-story">
+          <div class="reveal">
+            <img src="/assets/tanpo/Text 10.png" alt="Tanpo brand story">
+          </div>
+          <!-- <p class="id-note reveal">The letter 'O' is a coffee cup.</p> -->
+        </div>
+
+        <!-- Logo breakdown + sketch marks -->
+        <div class="id-logo-block">
+          <div class="id-logo-inner">
+            <div class="reveal">
+              <img src="/assets/tanpo/Tanpo Logo.png" alt="Tanpo logo">
+            </div>
+          </div>
+          <div class="id-marks">
+            <div class="id-marks-sketch">
+              <img src="/assets/tanpo/Sketch.png" alt="Sketch patterns" class="reveal">
+              <!-- <p class="id-mark-label reveal">random and subjective<br>sketch patterns</p> -->
+            </div>
+            <div class="id-marks-icon">
+              <img src="/assets/tanpo/Icon.png" alt="Dandelion icon" class="reveal">
+              <!-- <p class="id-mark-label reveal">dandelion<br>flower icon</p> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       4 · COFFEE & BAKED GOODS PACKAGING
+       Row A: [lorem text] [walkboard photo] [lorem text]
+       Row B: [Cup.jpg tall] [COFFEE & BAKED GOODS title] [Cup and cake overhead]
+       Row C: [Girl+poster] [Coffee bar interior] [T-shirt]
+  ══════════════════════════════════════════════════════ -->
+  <section class="s-packaging">
+
+    <!-- Row A: text / sign / text -->
+    <div class="pkg-top">
+      <div class="pkg-top-text reveal">
+        <img src="/assets/tanpo/Text 11.png" alt="">
+      </div>
+      <div class="pkg-walkboard reveal">
+        <img src="/assets/tanpo/walkboard.jpg" alt="Tanpo walkboard sign">
+      </div>
+      <div class="pkg-top-text reveal">
+        <img src="/assets/tanpo/Text 12.png" alt="">
+      </div>
+    </div>
+
+    <!-- Row B: cup portrait (left) | right combo: photo fills right 78%, title straddles edge -->
+    <div class="pkg-main">
+      <div class="pkg-cup reveal">
+        <img src="/assets/tanpo/Cup.jpg" alt="Tanpo cup with cookie">
+      </div>
+      <div class="pkg-right-combo">
+        <div class="pkg-right-photo reveal">
+          <img src="/assets/tanpo/Cup and cake.jpg" alt="Coffee cups, cake and cookie">
+        </div>
+        <div class="pkg-center-title">
+          <img src="/assets/tanpo/Text 13.png" alt="Coffee & Baked Goods Packaging">
+        </div>
+      </div>
+    </div>
+
+    <!-- Row C: lifestyle triptych -->
+    <div class="pkg-triptych">
+      <div class="reveal">
+        <img src="/assets/tanpo/Girl and poster.jpg" alt="Girl with Free Cookie poster">
+      </div>
+      <div class="reveal">
+        <img src="/assets/tanpo/Make coffee.jpg" alt="Coffee bar interior">
+      </div>
+      <div class="reveal">
+        <img src="/assets/tanpo/Tshirt.jpg" alt="Tanpo t-shirt">
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       5 · MERCH
+       Top lifestyle image, then TANPOCOFFEE · AVAILABLE,
+       then 2-col merch grid (cake bags | tote),
+       then MEMBER'S GIFT · LIMITED EDITION.
+  ══════════════════════════════════════════════════════ -->
+  <section class="s-merch">
+
+    <div class="merch-life reveal">
+      <img src="/assets/tanpo/Cup and cookie.jpg" alt="Tanpo cup and cookie">
+    </div>
+
+    <div class="merch-header">
+      <span>Tanpocoffee</span>
+      <span>Available</span>
+    </div>
+
+    <div class="merch-grid">
+      <div class="merch-item reveal">
+        <img src="/assets/tanpo/cake.jpg" alt="Tanpo baked goods bags">
+      </div>
+      <div class="merch-tote">
+        <div class="merch-tote-labels">
+          <span>Member's Gift</span>
+          <span>Limited Edition</span>
+        </div>
+        <div class="reveal">
+          <img src="/assets/tanpo/Tote bag.png" alt="Tanpo tote bag">
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       6 · POSTER CAMPAIGN
+       Full-width lifestyle bridge, then poster triptych.
+  ══════════════════════════════════════════════════════ -->
+  <section class="s-posters">
+    <div class="posters-life reveal">
+      <img src="/assets/tanpo/Girl and croissant.png" alt="Person holding Tanpo cup and croissant">
+    </div>
+    <div class="posters-main reveal">
+      <img src="/assets/tanpo/poster.jpg" alt="Don't Worry Eat Pastry · Feel Sleepy Drink Coffee · Need Sweetie Eat Cookie">
+    </div>
+  </section>
+
+
+  <script src="/src/projects.js" defer></script>
+  <script src="/src/nav.js"      defer></script>
+  <script src="/src/main.js"     defer></script>
+</body>
+</html>

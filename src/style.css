@@ -1,0 +1,950 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESET & TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --dark:  #1c1c1c;
+  --brown: #583f1e;
+  --cream: #efeeee;
+  --px: clamp(28px, 5vw, 80px);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED REVEAL INITIAL STATES
+   (GSAP will animate these in)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.reveal,
+.reveal-dark {
+  opacity: 0;
+  transform: translateY(44px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 1 · HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-hero {
+  background: var(--cream) url('/assets/tanpo/Background.jpg') center / cover fixed;
+  overflow: hidden;
+}
+
+/* Two-column split: left content / right photo */
+.hero-layout {
+  display: grid;
+  grid-template-columns: 62% 38%;
+  min-height: 72vh;
+}
+
+.hero-left {
+  padding: clamp(36px, 5vw, 72px) var(--px) clamp(20px, 2.5vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(12px, 2vw, 24px);
+}
+
+/* Keywords row */
+.hero-keywords {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.8vw, 24px);
+  flex-wrap: wrap;
+}
+
+.kw {
+  height: clamp(13px, 1.4vw, 20px);
+  width: auto;
+  flex-shrink: 0;
+  /* GSAP will handle initial opacity */
+}
+
+.kw-sep {
+  font-size: 0.85rem;
+  opacity: 0.35;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Title */
+.hero-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.hero-title img {
+  width: min(100%, 840px);
+}
+
+/* Logo → Branding label */
+.hero-label {
+  display: flex;
+  align-items: flex-start;
+}
+
+.hero-label img {
+  width: min(80%, 640px);
+}
+
+/* Right: hero photo flush to edge */
+.hero-right {
+  overflow: hidden;
+}
+
+.hero-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── Row A: Coffee Bean (left, height locked to text) | welcome body (right) ── */
+.hero-row-a {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* bean : text = 1:1, both grow proportionally */
+  gap: clamp(16px, 2.5vw, 40px);
+  padding: 0 var(--px) clamp(12px, 1.5vw, 20px);
+  align-items: stretch;
+}
+
+.hero-bean { overflow: hidden; }
+
+.hero-bean img {
+  width: 100%;
+  height: 100%;               /* fills the height set by the text column */
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-body {
+  display: flex;
+  align-items: center;
+}
+
+.hero-body img {
+  width: 100%;
+}
+
+/* ── Row B: Cup (left) | [Text7 overlapping · Text9 bottom-right] (right) ──
+   hero-row-b is the single positioned container, so cup (20%) and shop text
+   (left: 10%) both reference the same coordinate space — locking them together
+   as the viewport resizes.                                                     */
+.hero-row-b {
+  position: relative;
+  min-height: clamp(380px, 32vw, 480px);
+  margin: 0 var(--px) clamp(40px, 6vw, 80px);
+}
+
+.hero-cup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 20%;   /* matches the old 1fr of 5fr grid */
+  overflow: hidden;
+}
+
+.hero-cup img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right top;
+  display: block;
+}
+
+.hero-shop-wrap {
+  position: absolute;
+  left: 10%;          /* 10% of row = midpoint of the 20%-wide cup */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 45%;
+}
+
+.hero-shop-text {
+  max-width: none;
+  width: 100%;
+}
+
+.hero-since {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 28%;
+}
+
+.hero-since img {
+  width: 100%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 2 · DARK BRAND REVEAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-dark {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+  background: var(--dark);
+}
+
+.dark-bg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.dark-bg img {
+  width: 100%;
+  height: 130%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.85;
+}
+
+.dark-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(28,28,28,0.15) 0%, rgba(28,28,28,0.72) 100%),
+    linear-gradient(to right,  rgba(28,28,28,0.05) 0%, rgba(28,28,28,0.45) 60%);
+}
+
+.dark-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--px);
+}
+
+.namecard-wrap {
+  width: min(1200px, 96%);
+}
+
+.dark-content--center {
+  justify-content: center;
+}
+
+.namecard-wrap img {
+  width: 100%;
+  filter: brightness(1.08) contrast(1.02);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 3 · BRAND IDENTITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-identity {
+  background: var(--cream) url('/assets/tanpo/Background.jpg') center / cover fixed;
+  padding: clamp(52px, 7vw, 110px) var(--px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 4 · PACKAGING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-packaging {
+  background: var(--cream) url('/assets/tanpo/Background.jpg') center / cover fixed;
+  padding: clamp(52px, 7vw, 110px) var(--px);
+}
+
+/* Top strip: text / walkboard / text */
+.pkg-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(16px, 2.5vw, 40px);
+  margin-bottom: clamp(44px, 6vw, 88px);
+  align-items: center;
+}
+
+.pkg-top-text img {
+  width: 100%;
+  opacity: 0.82;
+}
+
+.pkg-walkboard img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 5 · MERCH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-merch {
+  background: var(--dark);
+  color: var(--cream);
+  padding: clamp(52px, 7vw, 110px) var(--px);
+}
+
+.merch-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(10px, 1vw, 13px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: clamp(28px, 4vw, 52px);
+}
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2.5vw, 40px);
+  align-items: start;
+}
+
+.merch-item img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.merch-tote-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(9px, 0.85vw, 11px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-bottom: 14px;
+}
+
+.merch-tote img {
+  width: 100%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 6 · POSTER CAMPAIGN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s-posters {
+  background: var(--dark);
+}
+
+.posters-life {
+  overflow: hidden;
+}
+
+.posters-life img {
+  width: 100%;
+  max-height: 52vh;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.posters-main img {
+  width: 100%;
+  display: block;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 3 · BRAND IDENTITY
+   Two-column: left = 3-col staircase, right = story + logo block
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.id-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3.5vw, 56px);
+  align-items: start;
+}
+
+/* Left: 3 photo columns */
+.id-left {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 18px;
+  row-gap: 10px;
+
+  align-items: start;
+}
+
+.id-col {
+  display: contents;
+}
+
+.id-col:nth-child(1) .id-photo {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 80px;
+}
+
+.id-col:nth-child(1) .id-swatch {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+}
+
+.id-col:nth-child(2) .id-photo {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 160px;
+}
+
+.id-col:nth-child(2) .id-swatch {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  margin-top: 80px;
+}
+
+.id-col:nth-child(3) .id-photo {
+  grid-column: 3;
+  grid-row: 1;
+  margin-top: 280px;
+}
+
+.id-col:nth-child(3) .id-swatch {
+  grid-column: 3;
+  grid-row: 1;
+  width: 100%;
+  margin-top: 200px;
+}
+
+.id-swatch {
+  width: 100%;
+  height: clamp(32px, 5vw, 64px);
+  object-fit: cover;
+  object-position: left;
+}
+
+.id-photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1.85;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Right: story + logo block stacked */
+.id-right {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 4vw, 36px);
+}
+
+.id-story img { width: 100%; }
+
+/* Logo breakdown block */
+.id-logo-block {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 2.5vw, 16px);
+}
+
+.id-logo-inner {
+  display: block;
+}
+
+.id-logo-inner > div > img {
+  width: 100%;
+}
+
+/* Sketch + Icon */
+.id-marks {
+  display: flex;
+  justify-content: flex-start;
+  gap: 60px;
+  margin-top: 30px;
+}
+
+.id-marks-sketch {
+  width: 60%;
+}
+
+.id-marks-icon {
+  width: 40%;
+}
+
+.id-marks-sketch img { width: 80%; }
+.id-marks-icon img { width: 80%; }
+
+/* Row B: Cup portrait (left) | right combo (photo + overlapping title) */
+.pkg-main {
+  display: grid;
+  grid-template-columns: clamp(160px, 27%, 340px) 1fr;
+  gap: 0;
+  margin-bottom: clamp(32px, 4vw, 56px);
+  align-items: stretch;
+}
+
+.pkg-cup { overflow: hidden; }
+
+.pkg-cup img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Right combo: image fills right 78%, title straddles the cream/photo boundary */
+.pkg-right-combo {
+  position: relative;
+  min-height: clamp(480px, 60vw, 860px);
+}
+
+.pkg-right-photo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 78%;
+  overflow: hidden;
+}
+
+.pkg-right-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/*
+ * Title: left:2% keeps most text on cream; since image starts at 22%
+ * and title width is 26%, the last ~18% of letters (the white ones)
+ * sit on the image's left edge.
+ */
+.pkg-center-title {
+  position: absolute;
+  left: 7.5%;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 26%;
+}
+
+.pkg-center-title img { width: 100%; }
+
+/* Row C: lifestyle triptych */
+.pkg-triptych {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(8px, 1.2vw, 16px);
+}
+
+.pkg-triptych > div { overflow: hidden; }
+
+.pkg-triptych img {
+  width: 100%;
+  height: clamp(560px, 95vh, 960px);
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MERCH — lifestyle bridge image
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.merch-life {
+  margin-bottom: clamp(32px, 4vw, 56px);
+  overflow: hidden;
+}
+
+.merch-life img {
+  width: 100%;
+  max-height: 55vh;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE — responsive overrides
+   Breakpoints: 900px tablet, 600px phone
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 900px) {
+
+  /* Hero: stack photo below title */
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+  .hero-right {
+    height: 52vw;
+    max-height: 420px;
+  }
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-left {
+    padding-bottom: 0;
+  }
+  /* Row A: stack bean above body copy */
+  .hero-row-a {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding-top: clamp(24px, 4vw, 48px);
+  }
+  .hero-bean img {
+    height: auto;
+    aspect-ratio: 16 / 5;     /* landscape crop on mobile */
+  }
+
+  /* Row B: hide entirely on mobile — cup reappears in pkg-main */
+  .hero-row-b {
+    display: none;
+  }
+
+  /* Identity: stack into single column */
+  .id-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Packaging main: stack Cup above combo */
+  .pkg-main {
+    grid-template-columns: 1fr;
+  }
+  .pkg-right-combo {
+    min-height: clamp(280px, 55vw, 480px);
+  }
+  .pkg-center-title {
+    left: 4%;
+    width: 32%;
+  }
+  .pkg-triptych {
+    grid-template-columns: 1fr;
+  }
+  .pkg-triptych img {
+    height: 64vw;
+    max-height: 480px;
+  }
+
+  /* Merch: stack */
+  .merch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .id-col:nth-child(1) .id-photo {
+    margin-top: 40px;
+  }
+
+  .id-col:nth-child(2) .id-photo {
+    margin-top: 80px;
+  }
+
+  .id-col:nth-child(3) .id-photo {
+    margin-top: 120px;
+  }
+
+  .id-col:nth-child(2) .id-swatch {
+    margin-top: 40px;
+  }
+
+  .id-col:nth-child(3) .id-swatch {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  :root { --px: 18px; }
+
+  /* Hero rows at 600px */
+  .hero-row-a {
+    gap: 12px;
+  }
+
+  .id-marks {
+    gap: 16px;
+  }
+
+  /* Packaging: top 3-col → 1-col */
+  .pkg-top {
+    grid-template-columns: 1fr;
+  }
+
+  /* Dark section: smaller namecard */
+  .namecard-wrap {
+    width: 95%;
+  }
+
+  /* Nav: hide title on very small screens */
+  .nav-title {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  /* Below 420px the 3-col staircase is too narrow — collapse to 1 column */
+  .id-left {
+    grid-template-columns: 1fr;
+  }
+  /* Restore landscape ratio so stacked photos don't tower */
+  .id-photo img {
+    aspect-ratio: 3 / 2;
+  }
+  .id-col:nth-child(1) .id-photo,
+  .id-col:nth-child(2) .id-photo,
+  .id-col:nth-child(3) .id-photo,
+  .id-col:nth-child(2) .id-swatch,
+  .id-col:nth-child(3) .id-swatch {
+    margin-top: 0;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED PROJECT NAV
+   Fixed top bar injected by nav.js on every
+   project page (not on the gallery landing).
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 60px);
+  background: rgba(239, 238, 238, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(28, 28, 28, 0.09);
+}
+
+.nav-back {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+  flex: 1;
+}
+.nav-back:hover { opacity: 1; }
+
+.nav-title {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: var(--dark);
+  text-align: center;
+  flex: 2;
+}
+
+.nav-pager {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.nav-count {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--dark);
+  opacity: 0.5;
+}
+
+.nav-arrow {
+  font-size: 16px;
+  color: var(--dark);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+  line-height: 1;
+}
+.nav-arrow:hover { opacity: 1; }
+.nav-arrow:first-child:hover { transform: translateX(-3px); }
+.nav-arrow:last-child:hover  { transform: translateX(3px); }
+
+.nav-arrow--off {
+  opacity: 0.18;
+  cursor: default;
+}
+
+/* Push hero content below the fixed nav on project pages */
+.page-project .s-hero {
+  padding-top: 52px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GALLERY LANDING PAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.page-gallery {
+  background: var(--dark);
+  color: var(--cream);
+  min-height: 100vh;
+}
+
+/* Header */
+.gallery-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(28px, 4vw, 52px) clamp(28px, 5vw, 80px) 0;
+  opacity: 0; /* GSAP animates this in */
+}
+
+.gallery-name {
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 3vw, 40px);
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+
+.gallery-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.gallery-designer {
+  font-family: Georgia, serif;
+  font-size: clamp(16px, 1.8vw, 26px);
+  letter-spacing: 0.08em;
+  font-style: italic;
+  color: var(--cream);
+}
+
+.gallery-sub {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(10px, 1vw, 13px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+/* Project list */
+.gallery-list {
+  padding: clamp(28px, 5vw, 72px) clamp(28px, 5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Individual project card */
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 48%;
+  min-height: 52vh;
+  text-decoration: none;
+  color: var(--cream);
+  border-top: 1px solid rgba(239, 238, 238, 0.1);
+  opacity: 0; /* GSAP animates this in */
+  position: relative;
+}
+
+.project-card:last-child {
+  border-bottom: 1px solid rgba(239, 238, 238, 0.1);
+}
+
+/* Card: left info panel */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(32px, 4vw, 60px) clamp(24px, 3vw, 48px) clamp(32px, 4vw, 60px) 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card:hover .card-info {
+  transform: translateX(-6px);
+}
+
+.card-number {
+  font-family: Georgia, serif;
+  font-size: clamp(48px, 7vw, 110px);
+  line-height: 1;
+  color: var(--cream);
+  opacity: 0.08;
+  letter-spacing: -0.02em;
+  align-self: flex-start;
+}
+
+.card-meta { margin-top: auto; }
+
+.card-name {
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 4vw, 60px);
+  font-weight: normal;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.card-sub {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(10px, 1vw, 13px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-bottom: 6px;
+}
+
+.card-year {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0.3;
+}
+
+.card-cta {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(10px, 1vw, 12px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0;
+  margin-top: clamp(20px, 3vw, 40px);
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateX(-8px);
+}
+
+.project-card:hover .card-cta {
+  opacity: 0.6;
+  transform: translateX(0);
+}
+
+/* Card: right cover photo */
+.card-cover {
+  overflow: hidden;
+  position: relative;
+}
+
+.card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.82) saturate(0.9);
+  transform: scale(1);
+  transition:
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    filter    0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card:hover .card-cover img {
+  transform: scale(1.05);
+  filter: brightness(0.95) saturate(1);
+}

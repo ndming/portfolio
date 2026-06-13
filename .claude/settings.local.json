@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdfinfo /home/minhnd59/repos/portfolio/assets/tanpo.pdf)",
+      "Bash(pdftoppm -r 72 /home/minhnd59/repos/portfolio/assets/tanpo.pdf /tmp/tanpo_page)",
+      "Read(//tmp/**)",
+      "Bash(convert /tmp/tanpo_page-1.ppm -resize 800x /tmp/tanpo_preview.jpg)",
+      "Bash(python3 -c \"from PIL import Image; img=Image.open\\('/tmp/tanpo_page-1.ppm'\\); img.save\\('/tmp/tanpo_preview.jpg'\\); print\\('done', img.size\\)\")",
+      "Bash(pdftoppm -r 120 /home/minhnd59/repos/portfolio/assets/tanpo.pdf /tmp/tanpo_hires)"
+    ]
+  }
+}
