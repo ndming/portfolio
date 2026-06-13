@@ -668,6 +668,27 @@ img {
     gap: 12px;
   }
 
+  /* Identity: escape the grid — explicit grid-column values on items
+     force implicit columns even with grid-template-columns: 1fr.
+     Switching to flex + display:block on id-col is the only clean fix. */
+  .id-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .id-col {
+    display: block;
+  }
+  .id-col .id-photo {
+    margin-top: 8px;
+  }
+  .id-col:nth-child(2) .id-swatch,
+  .id-col:nth-child(3) .id-swatch {
+    margin-top: 0;
+  }
+  .id-photo img {
+    aspect-ratio: 4 / 3;
+  }
   .id-marks {
     gap: 16px;
   }
@@ -685,24 +706,6 @@ img {
   /* Nav: hide title on very small screens */
   .nav-title {
     display: none;
-  }
-}
-
-@media (max-width: 420px) {
-  /* Below 420px the 3-col staircase is too narrow — collapse to 1 column */
-  .id-left {
-    grid-template-columns: 1fr;
-  }
-  /* Restore landscape ratio so stacked photos don't tower */
-  .id-photo img {
-    aspect-ratio: 3 / 2;
-  }
-  .id-col:nth-child(1) .id-photo,
-  .id-col:nth-child(2) .id-photo,
-  .id-col:nth-child(3) .id-photo,
-  .id-col:nth-child(2) .id-swatch,
-  .id-col:nth-child(3) .id-swatch {
-    margin-top: 0;
   }
 }
 
